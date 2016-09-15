@@ -1,0 +1,56 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: black;
+    color: white;
+}
+
+p {
+    margin: 0;
+    font-size: 32pt;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 96pt;
+    text-align: center;
+}
+
+#clock {
+    background-color: red;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 350px;
+    height: 200px;
+}
+
+#weather {
+    background-color: yellow;
+    position: absolute;
+    top: 250px;
+    left: 50px;
+    width: 350px;
+    height: 350px
+}
+
+#trafic {
+    background-color: blue;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 350px;
+    height: 200px
+}
+
+#schedule {
+    background-color: green;
+    position: absolute;
+    top: 250px;
+    right: 50px;
+    min-height: 350px;
+    max-height: calc(100% - 300px);
+    width: 350px
+}
