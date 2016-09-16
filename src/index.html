@@ -2,18 +2,24 @@
 <head>
 <title>MagicMirror</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<!-- <script rel="javascript" type="text/js" href="js/schedule.js" />
-<script rel="javascript" type="text/js" href="js/trafic.js" />
-<script rel="javascript" type="text/js" href="js/weather.js" /> -->
+<link rel="stylesheet" type="text/css" href="css/weather-icons.css">
+<script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
 <div id="clock">
-    <h1 id="time">12:37</h1>
-    <p id="date">17 August 2016</p>
+    <h1 id="time"></h1>
+    <p id="date"></p>
 </div>
-<div id="schedule"></div>
+<div id="weather">
+    <i id="sky"></i>
+    <p id="temp"></p>
+</div>
 <div id="trafic"></div>
-<div id="weather"></div>
+<div id="schedule"></div>
 <script src="js/clock.js"></script>
+<script src="js/weather.js"></script>
+<script src="js/trafic.js"></script>
+<script src="js/schedule.js"></script>
 </body>
 </html>
