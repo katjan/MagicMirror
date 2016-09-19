@@ -5,49 +5,37 @@ function setIcon(iconname) {
 function updateWeather() {
     $.getJSON('http://api.openweathermap.org/data/2.5/weather?q=Stockholm&APPID=cd00bfa3539685a36a8e237fbdb9426f', function(data) {
         var code = data.weather[0].id;
-        console.log(code);
         if (code >=200 && code <= 299) {
             // Thunderstorm
-            console.log("Thunderstorm");
             setIcon('wi-thunderstorm');
         } else if (code >=300 && code <= 399) {
             // Drizzle
-            console.log("Drizzle");
             setIcon('wi-showers');
         } else if (code >=500 && code <= 599) {
             // Rain
-            console.log("Rain");
             setIcon('wi-rain');
         } else if (code >=600 && code <= 699) {
             // Snow
-            console.log("Snow");
             setIcon('wi-snow-wind');
         } else if (code >=700 && code <= 799) {
             // Atmosphere
-            console.log("Atmosphere");
             setIcon('wi-dust');
         } else if (code == 800) {
             // Clear
-            console.log("Clear");
             setIcon('wi-day-sunny');
         } else if (code >=801 && code <= 899) {
             // Clouds
-            console.log("Clouds");
             setIcon('wi-day-cloudy');
         } else if (code >=900 && code <= 949) {
             // Extreme
-            console.log("Extreme");
             setIcon('wi-sandstorm');
         } else if (code >=951 && code <= 962) {
             // Additional
-            console.log("Additional");
             setIcon('wi-strong-wind');
         } else {
             // Unknown
-            console.log("Unknown");
             setIcon('wi-alien');
         }
-        console.log(Math.round(data.main.temp-273.15));
         document.getElementById('temp').innerHTML = Math.round(data.main.temp-273.15) + "&degC";
     });
     setInterval(updateWeather, 60000);
