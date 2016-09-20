@@ -8,8 +8,10 @@ import json
 
 HOST = 'localhost'
 PORT = 2000
-API_KEY = '3d9664bc06984271b1a8201621ddea18'
+SL_KEY = '3d9664bc06984271b1a8201621ddea18'
 SITE_ID= '9202'
+LOCATION = 'Stockholm'
+WEATHER_KEY = 'cd00bfa3539685a36a8e237fbdb9426f'
 
 class SingleTCPHandler(socketserver.BaseRequestHandler):
     "One instance per connection.  Override handle(self) to customize action."
@@ -27,9 +29,14 @@ class SingleTCPHandler(socketserver.BaseRequestHandler):
         self.request.send(("\n").encode('utf-8'))
 
         if path == "/api/v1/sl":
-            text = urlopen('http://api.sl.se/api2/realtimedepartures.json?key='+API_KEY+'&siteid='+SITE_ID+'&timewindow=60')
+            text = urlopen('http://api.sl.se/api2/realtimedepartures.json?key='+SL_KEY+'&siteid='+SITE_ID+'&timewindow=60')
             data = json.loads(text.read().decode('utf-8'))['ResponseData']['Metros']
             self.request.send(json.dumps(data).encode('utf-8'))
+        elif path == "/api/v1/weather":
+            text = urlopen('http://api.openweathermap.org/data/2.5/weather?q='+LOCATION+'&APPID='+WEATHER_KEY)
+            data = json.loads(text.read().decode('utf-8'))
+            self.request.send(json.dumps(data).encode('utf-8'))
+
 
         self.request.close()
 
