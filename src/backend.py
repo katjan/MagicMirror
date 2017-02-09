@@ -19,10 +19,10 @@ import codecs
 
 HOST = 'localhost'
 PORT = 2000
-SL_KEY = open('config/sl_key').read()
+SL_KEY = open('config/sl_key').read().strip()
 SITE_ID= '9202' # 9202 = Bergshamra
 LOCATION = 'Stockholm'
-WEATHER_KEY = open('config/weather_key').read()
+WEATHER_KEY = open('config/weather_key').read().strip()
 
 try:
     import argparse
@@ -40,9 +40,7 @@ def get_credentials():
     credential_dir = os.path.join(home_dir, '.credentials')
     if not os.path.exists(credential_dir):
         os.makedirs(credential_dir)
-    credential_path = os.path.join(credential_dir,
-                                   'calendar-python-quickstart.json')
-
+    credential_path = os.path.join(credential_dir, 'calendar-python-quickstart.json')
     store = oauth2client.file.Storage(credential_path)
     credentials = store.get()
     if not credentials or credentials.invalid:
@@ -101,7 +99,7 @@ class SingleTCPHandler(socketserver.BaseRequestHandler):
             self.send_message("Content-Type: application/json")
             self.send_message()
             try:
-                text = urlopen('http://api.sl.se/api2/realtimedepartures.json?key='+SL_KEY+'&siteid='+SITE_ID+'&timewindow=60')
+                text = urlopen('http://api.sl.se/api2/realtimedeparturesV4.json?key='+SL_KEY+'&siteid='+SITE_ID+'&timewindow=60')
                 data = json.loads(text.read().decode('utf-8'))['ResponseData']['Metros']
                 self.send_message(json.dumps(data))
             except HTTPError as e:
