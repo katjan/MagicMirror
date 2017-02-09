@@ -5,6 +5,8 @@ Mirror, mirror, on the wall...
 
 Copy all example files in `./src/config` and remove `.example` from their names. Update them with your own API keys.
 
+Run `backend.py` in the `src` folder. The page is available on `localhost:2000`.
+
 ## APIs used
 
 Weather: `https://openweathermap.org/`
