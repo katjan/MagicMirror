@@ -26,7 +26,10 @@ function updateTrafic() {
                 right.className = "traficEntryRight";
                 var left_text = document.createTextNode(entry['LineNumber'] + " " + entry['Destination']);
                 var right_text = document.createTextNode(entry['DisplayTime']);
+                var left_fade = document.createElement('div');
+                left_fade.className = "fade";
                 left.appendChild(left_text);
+                left.appendChild(left_fade);
                 right.appendChild(right_text);
                 row.appendChild(left);
                 row.appendChild(right);

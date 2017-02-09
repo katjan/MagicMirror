@@ -41,6 +41,9 @@ function updateSchedule() {
                 var hour = addZero(time.getHours());
                 var minute = addZero(time.getMinutes());
                 var right_text = document.createTextNode(hour + ":" + minute);
+                var left_fade = document.createElement('div');
+                left_fade.className = "fade";
+                left.appendChild(left_fade);
                 left.appendChild(left_text);
                 right.appendChild(right_text);
                 row.appendChild(left);
