@@ -2,116 +2,98 @@ function setIcon(iconname) {
     var elem = document.getElementById('sky');
     elem.className = "wi " + iconname
 }
+
 function updateWeather() {
-    $.getJSON('http://api.openweathermap.org/data/2.5/weather?q=Stockholm&APPID=cd00bfa3539685a36a8e237fbdb9426f', function(data) {
+    $.getJSON('http://localhost:2000/api/v1/weather', function(data) {
         var code = data.weather[0].id;
-        if (code >=200 && code <= 299) {
-            // Thunderstorm
-            setIcon('wi-thunderstorm');
-        } else if (code >=300 && code <= 399) {
-            // Drizzle
-            setIcon('wi-showers');
-        } else if (code >=500 && code <= 599) {
-            // Rain
-            setIcon('wi-rain');
-        } else if (code >=600 && code <= 699) {
-            // Snow
-            setIcon('wi-snow-wind');
-        } else if (code >=700 && code <= 799) {
-            // Atmosphere
-            setIcon('wi-dust');
-        } else if (code == 800) {
-            // Clear
-            setIcon('wi-day-sunny');
-        } else if (code >=801 && code <= 899) {
-            // Clouds
-            setIcon('wi-day-cloudy');
-        } else if (code >=900 && code <= 949) {
-            // Extreme
-            setIcon('wi-sandstorm');
-        } else if (code >=951 && code <= 962) {
-            // Additional
-            setIcon('wi-strong-wind');
-        } else {
-            // Unknown
+        var weather_set = false;
+        for (var i = 0; i < weather.length; i++) {
+            if (weather[i][0] == code) {
+                setIcon(weather[i][2]);
+                weather_set = true;
+                break;
+            }
+        }
+        if (!weather_set) {
             setIcon('wi-alien');
         }
         document.getElementById('temp').innerHTML = Math.round(data.main.temp-273.15) + "&degC";
     });
-    setInterval(updateWeather, 60000);
 }
-updateWeather();
 
-/*[200, 'thunderstorm with light rain', 'wi-thunderstorm]
-201	thunderstorm with rain	 11d
-202	thunderstorm with heavy rain	 11d
-210	light thunderstorm	 11d
-211	thunderstorm	 11d
-212	heavy thunderstorm	 11d
-221	ragged thunderstorm	 11d
-230	thunderstorm with light drizzle	 11d
-231	thunderstorm with drizzle	 11d
-232	thunderstorm with heavy drizzle	 11d
-300	light intensity drizzle	 09d
-301	drizzle	 09d
-302	heavy intensity drizzle	 09d
-310	light intensity drizzle rain	 09d
-311	drizzle rain	 09d
-312	heavy intensity drizzle rain	 09d
-313	shower rain and drizzle	 09d
-314	heavy shower rain and drizzle	 09d
-321	shower drizzle	 09d
-500	light rain	 10d
-501	moderate rain	 10d
-502	heavy intensity rain	 10d
-503	very heavy rain	 10d
-504	extreme rain	 10d
-511	freezing rain	 13d
-520	light intensity shower rain	 09d
-521	shower rain	 09d
-522	heavy intensity shower rain	 09d
-531	ragged shower rain	 09d
-600	light snow	 13d
-601	snow	 13d
-602	heavy snow	 13d
-611	sleet	 13d
-612	shower sleet	 13d
-615	light rain and snow	 13d
-616	rain and snow	 13d
-620	light shower snow	 13d
-621	shower snow	 13d
-622	heavy shower snow	 13d
-701	mist	 50d
-711	smoke	 50d
-721	haze	 50d
-731	sand, dust whirls	 50d
-741	fog	 50d
-751	sand	 50d
-761	dust	 50d
-762	volcanic ash	 50d
-771	squalls	 50d
-781	tornado	
-800	clear sky	 01d  01n
-801	few clouds	 02d  02n
-802	scattered clouds	 03d  03n
-803	broken clouds	 04d  03d
-804	overcast clouds	 04d  04d
-900	tornado
-901	tropical storm
-902	hurricane
-903	cold
-904	hot
-905	windy
-906	hail
-951	calm
-952	light breeze
-953	gentle breeze
-954	moderate breeze
-955	fresh breeze
-956	strong breeze
-957	high wind, near gale
-958	gale
-959	severe gale
-960	storm
-961	violent storm
-962	hurricane*/
+updateWeather();
+setInterval(updateWeather, 60000);
+
+var weather = [[200, 'thunderstorm with light rain', 'wi-storm-showers'],
+[201, 'thunderstorm with rain', 'wi-rain-mix'],
+[202, 'thunderstorm with heavy rain', 'wi-rain'],
+[210, 'light thunderstorm', 'wi-storm-showers'],
+[211, 'thunderstorm', 'wi-thunderstorm'],
+[212, 'heavy thunderstorm', 'wi-thunderstorm'],
+[221, 'ragged thunderstorm', 'wi-thunderstorm'],
+[230, 'thunderstorm with light drizzle', 'wi-storm-showers'],
+[231, 'thunderstorm with drizzle', 'wi-storm-showers'],
+[232, 'thunderstorm with heavy drizzle', 'wi-thunderstorm'],
+[300, 'light intensity drizzle', 'wi-rain-mix'],
+[301, 'drizzle', 'wi-rain-mix'],
+[302, 'heavy intensity drizzle', 'wi-rain-mix'],
+[310, 'light intensity drizzle rain', 'wi-rain-mix'],
+[311, 'drizzle rain', 'wi-rain-mix'],
+[312, 'heavy intensity drizzle rain', 'wi-rain-mix'],
+[313, 'shower rain and drizzle', 'wi-rain-mix'],
+[314, 'heavy shower rain and drizzle', 'wi-rain-mix'],
+[321, 'shower drizzle', 'wi-rain-mix'],
+[500, 'light rain', 'wi-rain-mix'],
+[501, 'moderate rain', 'wi-rain'],
+[502, 'heavy intensity rain', 'wi-rain'],
+[503, 'very heavy rain', 'wi-rain'],
+[504, 'extreme rain', 'wi-rain'],
+[511, 'freezing rain', 'wi-hail'],
+[520, 'light intensity shower rain', 'wi-rain-mix'],
+[521, 'shower rain', 'wi-rain'],
+[522, 'heavy intensity shower rain', 'wi-rain'],
+[531, 'ragged shower rain', 'wi-rain-mix'],
+[600, 'light snow', 'wi-snow'],
+[601, 'snow', 'wi-snow'],
+[602, 'heavy snow', 'wi-snow'],
+[611, 'sleet', 'wi-sleet'],
+[612, 'shower sleet', 'wi-sleet'],
+[615, 'light rain and snow', 'wi-sleet'],
+[616, 'rain and snow', 'wi-sleet'],
+[620, 'light shower snow', 'wi-snow'],
+[621, 'shower snow', 'wi-snow'],
+[622, 'heavy shower snow', 'wi-snow'],
+[701, 'mist', 'wi-dust'],
+[711, 'smoke', 'wi-dust'],
+[721, 'haze', 'wi-dust'],
+[731, 'sand, dust whirls', 'wi-dust'],
+[741, 'fog', 'wi-dust'],
+[751, 'sand', 'wi-dust'],
+[761, 'dust', 'wi-dust'],
+[762, 'volcanic ash', 'wi-volcano'],
+[771, 'squalls', 'wi-sandstorm'],
+[781, 'tornado', 'wi-tornado'],
+[800, 'clear sky', 'wi-day-sunny'],
+[801, 'few clouds', 'wi-day-cloudy'],
+[802, 'scattered clouds', 'wi-day-cloudy'],
+[803, 'broken clouds', 'wi-cloudy'],
+[804, 'overcast clouds', 'wi-cloudy'],
+[900, 'tornado', 'wi-tornado'],
+[901, 'tropical storm', 'wi-sandstorm'],
+[902, 'hurricane', 'wi-strong-wind'],
+[903, 'cold', 'wi-snowflake-cold'],
+[904, 'hot', 'wi-thermometer'],
+[905, 'windy', 'wi-strong-wind'],
+[906, 'hail', 'wi-hail'],
+[951, 'calm', 'wi-day-sunny'],
+[952, 'light breeze', 'wi-windy'],
+[953, 'gentle breeze', 'wi-windy'],
+[954, 'moderate breeze', 'wi-strong-wind'],
+[955, 'fresh breeze', 'wi-strong-wind'],
+[956, 'strong breeze', 'wi-strong-wind'],
+[957, 'high wind, near gale', 'wi-strong-wind'],
+[958, 'gale', 'wi-strong-wind'],
+[959, 'severe gale', 'wi-strong-wind'],
+[960, 'storm', 'wi-strong-wind'],
+[961, 'violent storm', 'wi-strong-wind'],
+[962, 'hurricane', 'wi-strong-wind']]

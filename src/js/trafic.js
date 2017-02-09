@@ -8,9 +8,9 @@ function updateTrafic() {
             var elems = document.createElement('div');
             elems.className = "traficEntries";
             json_data = json_data.sort(function(a,b){
-                aStr = a['LineNumber'] + a['Destination'];
-                bStr = b['LineNumber'] + b['Destination'];
-                return aStr.localeCompare(bStr);
+                aStr = "" + a['JourneyDirection'];
+                bStr = "" + b['JourneyDirection'];
+                return bStr.localeCompare(aStr);
                 /*if (aStr === bStr) {
                     return a['DisplayTime'].localeCompare(b['DisplayTime']);
                 } else {
@@ -38,9 +38,9 @@ function updateTrafic() {
                 elem.removeChild(elem.firstChild);
             }
             elem.appendChild(elems);
-            setInterval(updateTrafic, 10000);
         }
     });
 }
 
 updateTrafic();
+setInterval(updateTrafic, 10000);

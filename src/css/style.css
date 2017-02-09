@@ -31,7 +31,7 @@ body {
 #weather {
     /*background-color: yellow;*/
     position: absolute;
-    top: 225px;
+    top: 250px;
     left: 25px;
     width: 350px;
     height: 350px
@@ -69,6 +69,7 @@ body {
 .traficRow {
     display: table;
     width: 100%;
+    table-layout: fixed;
     margin: 0;
 }
 
@@ -77,6 +78,7 @@ body {
     width: 75%;
     margin: 0;
     overflow: hidden;
+    white-space: nowrap;
     font-size: 18pt;
 }
 
@@ -86,15 +88,47 @@ body {
     margin: 0;
     text-align: right;
     overflow: hidden;
+    white-space: nowrap;
     font-size: 18pt;
 }
 
 #schedule {
-    background-color: green;
+    /*background-color: green;*/
     position: absolute;
-    top: 225px;
+    top: 250px;
     right: 25px;
     min-height: 350px;
     max-height: calc(100% - 300px);
     width: 350px
+}
+
+.scheduleEntries {
+    width: 100%;
+    margin: 0;
+}
+
+.scheduleRow {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin: 0;
+}
+
+.scheduleEntryLeft {
+    display: table-cell;
+    width: 75%;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 18pt;
+}
+
+.scheduleEntryRight {
+    display: table-cell;
+    width: 25%;
+    margin: 0;
+    text-align: right;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 18pt;
 }

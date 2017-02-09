@@ -16,7 +16,7 @@ function updateTime() {
     var minute = addZero(today.getMinutes());
     document.getElementById('time').innerHTML = hour + ":" + minute;
     document.getElementById('date').innerHTML = day + " " + months[month] + " " + year;
-    setInterval(updateTime, 1000);
 }
 
 updateTime();
+setInterval(updateTime, 1000);
